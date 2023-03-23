@@ -5,9 +5,10 @@ import com.minidnd.service.CharacterService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/characters")
+@RequestMapping("/characters")
 public class CharacterController {
     private final CharacterService service;
 
@@ -17,7 +18,7 @@ public class CharacterController {
 
     @PostMapping
     public Character addCharacter(@RequestBody Character character) {
-        return service.saveCharacter(character);
+        return service.addCharacter(character);
     }
 
     @GetMapping()
@@ -25,9 +26,9 @@ public class CharacterController {
         return service.getCharacters();
     }
 
-    @GetMapping("{name}")
-    public Character findCharacterByName(@PathVariable String name) {
-        return service.getCharacterByName(name).orElseThrow();
+    @GetMapping("/{name}")
+    public Optional<Character> findCharacterByName(@PathVariable String name) {
+        return service.getCharacterByName(name);
     }
 
     @PutMapping

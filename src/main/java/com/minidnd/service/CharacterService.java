@@ -16,8 +16,8 @@ public class CharacterService {
         this.characterRepository = characterRepository;
     }
 
-    public Character saveCharacter(Character character) {
-        return characterRepository.save(character);
+    public Character addCharacter(Character character) {
+        return characterRepository.addCharacter(character);
     }
 
     public List<Character> getCharacters() {

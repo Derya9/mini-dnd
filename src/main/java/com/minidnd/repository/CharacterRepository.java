@@ -27,7 +27,7 @@ public class CharacterRepository {
     }
 
     // CREATE
-    public Character save(Character character) {
+    public Character addCharacter(Character character) {
         characterList.add(character);
         return character;
     }
@@ -46,7 +46,7 @@ public class CharacterRepository {
     // UPDATE
     public Character update(Character character) {
         delete(character.getName());
-        save(character);
+        addCharacter(character);
         return character;
     }
 

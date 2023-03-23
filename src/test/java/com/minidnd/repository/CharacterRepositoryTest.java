@@ -26,7 +26,7 @@ class CharacterRepositoryTest {
 
     @Test
     void save() {
-        Character result = characterRepository.save(character);
+        Character result = characterRepository.addCharacter(character);
 
         assertEquals(character, result);
         assertTrue(characters.contains(character));
@@ -47,13 +47,21 @@ class CharacterRepositoryTest {
         characters.add(character);
 
         Optional<Character> result = characterRepository.findByName(character.getName());
-        Optional<Character> expected = Optional.ofNullable(character);
+        Optional<Character> expected = Optional.of(character);
 
         assertEquals(expected,result);
     }
 
     @Test
     void update() {
+        characters.add(character);
+        Character newCharacter = new Character("Ella", Race.HUMAN, CharacterClass.FIGHTER);
+
+        characterRepository.update(newCharacter);
+
+        Character result = characters.get(0);
+        assertNotEquals(character, result);
+        assertEquals(newCharacter, result);
 
     }
 
