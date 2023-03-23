@@ -6,7 +6,6 @@ import com.minidnd.character.CharacterClass;
 import com.minidnd.character.Race;
 import com.minidnd.service.CharacterService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -29,13 +28,12 @@ class CharacterControllerTest {
     Character character = new Character("Ella", Race.HUMAN, CharacterClass.MAGE);
 
 
-
     @Test
     void addCharacter() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                .post(url)
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(character)))
+                        .post(url)
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(character)))
                 .andExpect(status().isOk());
 
         Mockito.verify(characterService).addCharacter(character);
@@ -65,9 +63,9 @@ class CharacterControllerTest {
     @Test
     void updateCharacter() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                .put("/characters")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(character)))
+                        .put("/characters")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(character)))
                 .andExpect(status().isOk());
 
         Mockito.verify(characterService).updateCharacter(character);
@@ -78,8 +76,8 @@ class CharacterControllerTest {
     @Test
     void deleteCharacter() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/characters/Lucy")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .delete("/characters/Lucy")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         Mockito.verify(characterService).deleteCharacter("Lucy");
