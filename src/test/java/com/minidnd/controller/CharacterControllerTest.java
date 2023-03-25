@@ -25,7 +25,7 @@ class CharacterControllerTest {
     @Autowired
     ObjectMapper objectMapper;
     String url = "/characters";
-    Character character = new Character("Ella", Race.HUMAN, CharacterClass.MAGE);
+    Character character = new Character(1L,"Ella", Race.HUMAN, CharacterClass.MAGE);
 
 
     @Test
@@ -50,37 +50,36 @@ class CharacterControllerTest {
     }
 
     @Test
-    void findCharacterByName() throws Exception {
+    void findCharacterById() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/characters/Lucy")
+                        .get("/characters/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        Mockito.verify(characterService).getCharacterByName("Lucy");
-
+        Mockito.verify(characterService).getCharacterById(1L);
     }
 
     @Test
-    void updateCharacter() throws Exception {
+    void updateCharacterNameById() throws Exception {
+        Character updatedCharacter = new Character(character.getId(), "Bob", character.getRace(), character.getCharacterClass());
         mockMvc.perform(MockMvcRequestBuilders
-                        .put("/characters")
+                        .put(url)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(character)))
+                        .content(objectMapper.writeValueAsString(updatedCharacter.getId())))
                 .andExpect(status().isOk());
 
-        Mockito.verify(characterService).updateCharacter(character);
-
+        characterService.updateCharacterNameById(1L, "Bob");
+        Mockito.verify(characterService).updateCharacterNameById(1L, "Bob");
 
     }
 
     @Test
     void deleteCharacter() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/characters/Lucy")
+                        .delete("/characters/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        Mockito.verify(characterService).deleteCharacter("Lucy");
-
+        Mockito.verify(characterService).deleteCharacter(1L);
     }
 }

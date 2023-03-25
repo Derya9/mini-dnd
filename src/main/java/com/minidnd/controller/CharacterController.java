@@ -26,19 +26,19 @@ public class CharacterController {
         return service.getCharacters();
     }
 
-    @GetMapping("/{name}")
-    public Optional<Character> findCharacterByName(@PathVariable String name) {
-        return service.getCharacterByName(name);
+    @GetMapping("{id}")
+    public Optional<Character> findCharacterById(@PathVariable Long id) {
+        return service.getCharacterById(id);
     }
 
     @PutMapping
-    public Character updateCharacter(@RequestBody Character character) {
-        return service.updateCharacter(character);
+    public Character updateCharacterByName(@RequestBody Long id, String name) {
+        return service.updateCharacterNameById(id, name);
     }
 
-    @DeleteMapping("{name}")
-    public void deleteCharacter(@PathVariable String name) {
-        service.deleteCharacter(name);
+    @DeleteMapping("{id}")
+    public void deleteCharacter(@PathVariable Long id) {
+        service.deleteCharacter(id);
     }
 
 }

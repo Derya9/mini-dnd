@@ -9,31 +9,31 @@ import java.util.Optional;
 
 @Service
 public class CharacterService {
-
-    private final CharacterRepository characterRepository;
+    CharacterRepository characterRepository;
 
     public CharacterService(CharacterRepository characterRepository) {
         this.characterRepository = characterRepository;
     }
 
+
+    public Optional<Character> getCharacterById(Long id) {
+        return characterRepository.findById(id);
+    }
+
     public Character addCharacter(Character character) {
-        return characterRepository.addCharacter(character);
+        return characterRepository.save(character);
     }
 
     public List<Character> getCharacters() {
-        return characterRepository.getAllCharacters();
+        return (List<Character>) characterRepository.findAll();
     }
 
-    public Optional<Character> getCharacterByName(String name) {
-        return characterRepository.findByName(name);
+    public void deleteCharacter(Long id) {
+        characterRepository.deleteById(id);
     }
 
-    public void deleteCharacter(String name) {
-        characterRepository.delete(name);
-    }
-
-    public Character updateCharacter(Character character) {
-        return characterRepository.update(character);
+    public Character updateCharacterNameById(Long id, String newName) {
+        return characterRepository.updateNameById(newName, id);
     }
 
 }

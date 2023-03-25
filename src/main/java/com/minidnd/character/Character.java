@@ -1,13 +1,32 @@
 package com.minidnd.character;
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
+import java.util.Objects;
+@Entity
+@Table
 public class Character {
+    @Id
+    @GeneratedValue
+    @Column
+    private Long id;
+    @Column
     private String name;
+    @Column
     private Race race;
+    @Column
     private CharacterClass characterClass;
 
-    public Character(String name, Race race, CharacterClass characterClass) {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Character(Long id, String name, Race race, CharacterClass characterClass) {
+        this.id = id;
         this.name = name;
         this.race = race;
         this.characterClass = characterClass;
