@@ -1,6 +1,8 @@
 package com.minidnd.controller;
 
 import com.minidnd.character.Character;
+import com.minidnd.character.CharacterClass;
+import com.minidnd.character.Race;
 import com.minidnd.service.CharacterService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +18,13 @@ public class CharacterController {
         this.service = service;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public Character addCharacter(@RequestBody Character character) {
         return service.addCharacter(character);
     }
 
     @GetMapping()
     public List<Character> findAllCharacters() {
-
         return service.getCharacters();
     }
 
