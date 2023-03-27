@@ -1,12 +1,17 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 
 const CharacterDetails = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([])
+    const {id} = useParams();
+    const navigate = useNavigate()
+
 
     const fetchData = () => {
-        return fetch("/characters")
+        return fetch("/characters/" + id)
             .then((response) => response.json())
-            .then(data => {setData(data);
+            .then(data => {
+                setData(data);
             })
     }
 
@@ -15,21 +20,25 @@ const CharacterDetails = () => {
     }, [])
     console.log(data);
 
-    return (
-        <div>
-            <p>Mini-DnD</p>
-            {data.map((character) => (
-                <div className="characterDetails" key ={character.id}>
+    let deleteCharacter = async () => {
+        await fetch(`/characters/` + id, {
+            method: "DELETE",
+        });
+        navigate("/");
+    };
 
-                    <p>Name:
-                            {character && character.name}
-                    </p>
-                    <p>Race: {character && character.race} </p>
-                    <p>Character Class: {character && character.characterClass} </p>
-                </div>
-            ))}
-        </div>
-    );
+    return (<div>
+            <p>Mini-DnD</p>
+            <div className="characterDetails" key={data.id}>
+
+                <p>Name:{data && data.name}</p>
+                <p>Race: {data && data.race} </p>
+                <p>Character Class: {data && data.characterClass} </p>
+                <button className="deleteButton" type="submit" onClick={deleteCharacter} required>Delete Character
+                </button>
+
+            </div>
+        </div>);
 }
 
 export default CharacterDetails;
