@@ -21,10 +21,6 @@ public class Character {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Character(Long id, String name, Race race, CharacterClass characterClass) {
         this.id = id;
         this.name = name;

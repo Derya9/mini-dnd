@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 import CharacterForm from "./components/CharacterForm";
 import CharacterDetails from "./components/CharacterDetails";
+import UpdateCharacter from "./components/UpdateCharacter";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                         <Route path="/" exact element={<LandingPage/>}/>
                         <Route path="/characters/add" element={<CharacterForm/>}/>
                         <Route path="/characters/:id" element={<CharacterDetails/>}/>
+                        <Route path="/characters/:id/update" element={<UpdateCharacter/>}/>
 
                     </Routes>
                     <Footer/>

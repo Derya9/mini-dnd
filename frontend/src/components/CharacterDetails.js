@@ -21,20 +21,27 @@ const CharacterDetails = () => {
     console.log(data);
 
     let deleteCharacter = async () => {
-        await fetch(`/characters/` + id, {
+        await fetch("/characters/" + id, {
             method: "DELETE",
         });
         navigate("/");
     };
 
-    return (<div>
+
+
+
+
+    return (
+        <div>
             <p>Mini-DnD</p>
             <div className="characterDetails" key={data.id}>
 
                 <p>Name:{data && data.name}</p>
+                <a href={"/characters/" + data.id + "/update"}><button>Change Name</button> </a>
+
                 <p>Race: {data && data.race} </p>
                 <p>Character Class: {data && data.characterClass} </p>
-                <button className="deleteButton" type="submit" onClick={deleteCharacter} required>Delete Character
+                <button className="deleteButton" type="submit" onClick={deleteCharacter}>Delete Character
                 </button>
 
             </div>

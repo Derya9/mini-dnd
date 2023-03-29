@@ -32,8 +32,5 @@ public class CharacterService {
         characterRepository.deleteById(id);
     }
 
-    public Character updateCharacterNameById(Long id, String newName) {
-        return characterRepository.updateNameById(newName, id);
-    }
 
 }

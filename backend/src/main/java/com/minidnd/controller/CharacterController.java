@@ -1,8 +1,6 @@
 package com.minidnd.controller;
 
 import com.minidnd.character.Character;
-import com.minidnd.character.CharacterClass;
-import com.minidnd.character.Race;
 import com.minidnd.service.CharacterService;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,9 +31,9 @@ public class CharacterController {
         return service.getCharacterById(id);
     }
 
-    @PutMapping
-    public Character updateCharacterByName(@RequestBody Long id, String name) {
-        return service.updateCharacterNameById(id, name);
+    @PutMapping("{id}/update")
+    public void updateCharacterByName(@RequestBody Character character, @PathVariable String id) {
+        service.addCharacter(character);
     }
 
     @DeleteMapping("{id}")

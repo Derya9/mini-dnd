@@ -59,19 +59,19 @@ class CharacterControllerTest {
         Mockito.verify(characterService).getCharacterById(1L);
     }
 
-    @Test
-    void updateCharacterNameById() throws Exception {
-        Character updatedCharacter = new Character(character.getId(), "Bob", character.getRace(), character.getCharacterClass());
-        mockMvc.perform(MockMvcRequestBuilders
-                        .put(url)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(updatedCharacter.getId())))
-                .andExpect(status().isOk());
-
-        characterService.updateCharacterNameById(1L, "Bob");
-        Mockito.verify(characterService).updateCharacterNameById(1L, "Bob");
-
-    }
+//    @Test
+//    void updateCharacterNameById() throws Exception {
+//        Character updatedCharacter = new Character(character.getId(), "Bob", character.getRace(), character.getCharacterClass());
+//        mockMvc.perform(MockMvcRequestBuilders
+//                        .put(url)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(updatedCharacter.getId())))
+//                .andExpect(status().isOk());
+//
+//        characterService.updateCharacterNameById(1L, "Bob");
+//        Mockito.verify(characterService).updateCharacterNameById(1L, "Bob");
+//
+//    }
 
     @Test
     void deleteCharacter() throws Exception {

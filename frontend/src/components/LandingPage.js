@@ -19,6 +19,7 @@ const LandingPage = () => {
 
         <div>
             <p>Mini-DnD</p>
+            <p> All characters</p>
             <a href="/characters/add"><p>Add character</p></a>
             {data.map((character) => (
                     <div className="characterContainer" key ={character.id}>
