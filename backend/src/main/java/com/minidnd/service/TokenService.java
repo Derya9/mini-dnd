@@ -3,10 +3,7 @@ package com.minidnd.service;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.JwsHeader;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -16,9 +13,12 @@ import java.util.stream.Collectors;
 @Service
 public class TokenService {
     private final JwtEncoder encoder;
+    private final JwtDecoder decoder;
 
-    public TokenService(JwtEncoder encoder) {
+
+    public TokenService(JwtEncoder encoder, JwtDecoder decoder) {
         this.encoder = encoder;
+        this.decoder = decoder;
     }
 
     public String generateToken(Authentication authentication) {
@@ -36,5 +36,9 @@ public class TokenService {
                 .build();
         var encoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS512).build(), claims);
         return  this.encoder.encode(encoderParameters).getTokenValue();
+    }
+
+    public Jwt decode(String token) {
+        return decoder.decode(token);
     }
 }
